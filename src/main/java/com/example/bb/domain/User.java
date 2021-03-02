@@ -3,6 +3,7 @@ package com.example.bb.domain;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "user")
 public class User {
     private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
     private String username;
