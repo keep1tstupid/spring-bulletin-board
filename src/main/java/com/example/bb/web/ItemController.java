@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 public class ItemController {
-
     @Autowired
     private ItemRepository itemRepository;
 
@@ -65,5 +64,4 @@ public class ItemController {
     void deleteItem(@PathVariable Long id) {
         itemRepository.deleteById(id);
     }
-
 }

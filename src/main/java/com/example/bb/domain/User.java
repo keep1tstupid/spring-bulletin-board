@@ -5,10 +5,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "user")
 public class User {
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+
+    @Column(name = "username", nullable = false)
     private String username;
+
+    @Column(name = "password", nullable = false)
     private String password;
+
+    @Column(name = "email", nullable = false)
     private String email;
+
+    @Column(name = "role", nullable = false)
     private String role;
 
     public User() {}

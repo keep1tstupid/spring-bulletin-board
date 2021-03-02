@@ -5,10 +5,18 @@ import javax.persistence.*;
 @Entity
 @Table(name = "item")
 public class Item {
-    private @Id @GeneratedValue(strategy = GenerationType.AUTO) Long id;
+    private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
+
+    @Column(name = "title", nullable = false)
     private String title;
+
+    @Column(name = "type", nullable = false)
     private String type;
+
+    @Column(name = "description", nullable = false)
     private String description;
+
+    @Column(name = "contactInfo", nullable = false)
     private String contactInfo;
 
     public Item() {}

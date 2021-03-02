@@ -3,6 +3,7 @@ services:
   bb-database:
     image: postgres
     environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
       - POSTGRES_DB=bbbase
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
@@ -17,3 +18,5 @@ volumes:
 # docker-compose down << stop db
 # docker-compose down -v << destroy database
 # docker-compose logs -f --tail 200 bb-database << see db logs
+
+# jdbc:postgresql://localhost:5555/bbbase
