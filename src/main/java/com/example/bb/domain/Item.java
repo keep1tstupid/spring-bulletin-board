@@ -52,6 +52,14 @@ public class Item {
         this.description = description;
     }
 
+    public String getContactInfo() {
+        return contactInfo;
+    }
+
+    public void setContactInfo(String contactInfo) {
+        this.contactInfo = contactInfo;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
