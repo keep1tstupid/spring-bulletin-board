@@ -1,0 +1,19 @@
+version: '3'
+services:
+  bb-database:
+    image: postgres
+    environment:
+      - POSTGRES_DB=bbbase
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    volumes:
+      - bb-database:/var/lib/postgresql/data
+    ports:
+      - "5555:5432"
+volumes:
+  bb-database:
+
+# docker-compose up -d << start db (-d - no logs)
+# docker-compose down << stop db
+# docker-compose down -v << destroy database
+# docker-compose logs -f --tail 200 bb-database << see db logs
