@@ -14,6 +14,7 @@ public class ItemController {
     @Autowired
     private ItemRepository itemRepository;
 
+    // show all items
     @GetMapping("/home")
     public String showAllItems(Model model) {
         List<Item> items = (List<Item>) itemRepository.findAll();
@@ -21,19 +22,20 @@ public class ItemController {
         return "itemsList";
     }
 
-    // REST service to get all items
+    // get all items
     @GetMapping("/items")
     public @ResponseBody
     List<Item> allItems() {
         return (List<Item>) itemRepository.findAll();
     }
 
-    // REST service to save new item
+    // add new item
     @PostMapping("/items")
     Item addItem(@RequestBody Item newItem) {
         return itemRepository.save(newItem);
     }
 
+    //update item
     @PutMapping("/items/{id}")
     Optional<Item> updateItem(@RequestBody Item newItem, @PathVariable("id") Long itemId) {
         return itemRepository.findById(itemId)
@@ -46,20 +48,21 @@ public class ItemController {
                 });
     }
 
-    // REST service to get item by id
+    // get item by id
     @GetMapping("/item/{id}")
     public @ResponseBody
     Optional<Item> findItem(@PathVariable("id") Long itemId) {
         return itemRepository.findById(itemId);
     }
 
-    // REST service to get item by type
+    // get item by type
     @GetMapping("/items/{type}")
     public @ResponseBody
     List<Item> findItem(@PathVariable("type") String type) {
         return itemRepository.findByType(type);
     }
 
+    // delete item by id
     @DeleteMapping("/items/{id}")
     void deleteItem(@PathVariable Long id) {
         itemRepository.deleteById(id);
