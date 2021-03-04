@@ -11,6 +11,7 @@ public class Item {
     private String title;
 
     @Column(name = "type", nullable = false)
+    @Enumerated(EnumType.STRING)
     private ItemType type;
 
     @Column(name = "state", nullable = false)
@@ -18,7 +19,6 @@ public class Item {
     private ItemState state;
 
     @Column(name = "description", nullable = false)
-    @Enumerated(EnumType.STRING)
     private String description;
 
     @Column(name = "contactInfo", nullable = false)
