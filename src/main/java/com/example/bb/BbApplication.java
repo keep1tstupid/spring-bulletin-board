@@ -2,6 +2,7 @@ package com.example.bb;
 
 import com.example.bb.domain.Item;
 import com.example.bb.domain.ItemState;
+import com.example.bb.domain.ItemType;
 import com.example.bb.repository.ItemRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,13 +20,13 @@ public class BbApplication {
     public CommandLineRunner bbDemo(ItemRepository itemRepository) {
         return (args) -> {
             itemRepository.save(
-                    new Item("title1", "ad", ItemState.APPROVED,
+                    new Item("title1", ItemType.NOTE, ItemState.APPROVED,
                             "descr1", "contact1"));
             itemRepository.save(
-                    new Item("title2", "ad", ItemState.APPROVED,
+                    new Item("title2", ItemType.COMPLAINT, ItemState.APPROVED,
                             "lorem ipsum", "contact2"));
             itemRepository.save(
-                    new Item("title3", "complaint", ItemState.IN_MODERATION,
+                    new Item("title3", ItemType.ADVERTISEMENT, ItemState.IN_MODERATION,
                             "qwertqwerty", "123123123"));
         };
     }

@@ -11,13 +11,14 @@ public class Item {
     private String title;
 
     @Column(name = "type", nullable = false)
-    private String type;
+    private ItemType type;
 
     @Column(name = "state", nullable = false)
     @Enumerated(EnumType.STRING)
     private ItemState state;
 
     @Column(name = "description", nullable = false)
+    @Enumerated(EnumType.STRING)
     private String description;
 
     @Column(name = "contactInfo", nullable = false)
@@ -25,7 +26,7 @@ public class Item {
 
     public Item() {}
 
-    public Item(String title, String type, ItemState state, String description, String contactInfo) {
+    public Item(String title, ItemType type, ItemState state, String description, String contactInfo) {
         this.title = title;
         this.type = type;
         this.state = state;
@@ -49,11 +50,11 @@ public class Item {
         this.title = title;
     }
 
-    public String getType() {
+    public ItemType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(ItemType type) {
         this.type = type;
     }
 
