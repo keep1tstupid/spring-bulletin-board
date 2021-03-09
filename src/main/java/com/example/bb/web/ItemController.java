@@ -15,14 +15,6 @@ public class ItemController {
     @Autowired
     private ItemRepository itemRepository;
 
-    // show all items
-    @GetMapping("/home")
-    public String showAllItems(Model model) {
-        List<Item> items = (List<Item>) itemRepository.findAll();
-        model.addAttribute("items", items);
-        return "itemsList";
-    }
-
     // get all items
     @GetMapping("/items")
     public @ResponseBody
