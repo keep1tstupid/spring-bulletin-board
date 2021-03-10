@@ -1,6 +1,8 @@
 package com.example.bb.domain;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -16,16 +18,19 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "role", nullable = false)
-    private String role;
+    @Column(name = "roles", nullable = false)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 
     public User() {}
 
-    public User(String username, String password, String email, String role) {
+    public User(String username, String email, String password) {
         this.username = username;
-        this.password = password;
         this.email = email;
-        this.role = role;
+        this.password = password;
     }
 
     public Long getId() {
@@ -60,12 +65,12 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
-        return role;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     @Override
@@ -74,7 +79,6 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
                 '}';
     }
 }
