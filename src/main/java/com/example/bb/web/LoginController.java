@@ -22,42 +22,49 @@ public class LoginController {
     @Autowired
     EmailSenderService emailSenderService;
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
+
+    @GetMapping("/test")
+    public String test() {
+        return "testView";
     }
 
-    @GetMapping("/forgotPassword")
-    public String forgotPassword(Model model, User user) {
-        model.addAttribute("user", user);
-        return "forgotPassword";
-    }
 
-    // Receive the address and send an email
-    @PostMapping("/forgotPassword")
-    public String forgotUserPassword(Model model, User user) {
-        User existingUser = userRepository.findByEmail(user.getEmail());
-        if (existingUser != null) {
-            // Create token
-            ConfirmationToken confirmationToken = new ConfirmationToken(existingUser);
-
-            // Save it
-            confirmationTokenRepository.save(confirmationToken);
-
-            // Create the email
-            SimpleMailMessage mailMessage = new SimpleMailMessage();
-            mailMessage.setTo(existingUser.getEmail());
-            mailMessage.setSubject("Complete Password Reset!");
-            mailMessage.setFrom("test-email@gmail.com");
-            mailMessage.setText("lol hi");
-
-            // Send the email
-            emailSenderService.sendEmail(mailMessage);
-
-            return "login";
-        } else {
-            return "error";
-        }
-
-    }
+//    @GetMapping("/login")
+//    public String login() {
+//        return "login";
+//    }
+//
+//    @GetMapping("/forgotPassword")
+//    public String forgotPassword(Model model, User user) {
+//        model.addAttribute("user", user);
+//        return "forgotPassword";
+//    }
+//
+//    // Receive the address and send an email
+//    @PostMapping("/forgotPassword")
+//    public String forgotUserPassword(Model model, User user) {
+//        User existingUser = userRepository.findByEmail(user.getEmail());
+//        if (existingUser != null) {
+//            // Create token
+//            ConfirmationToken confirmationToken = new ConfirmationToken(existingUser);
+//
+//            // Save it
+//            confirmationTokenRepository.save(confirmationToken);
+//
+//            // Create the email
+//            SimpleMailMessage mailMessage = new SimpleMailMessage();
+//            mailMessage.setTo(existingUser.getEmail());
+//            mailMessage.setSubject("Complete Password Reset!");
+//            mailMessage.setFrom("test-email@gmail.com");
+//            mailMessage.setText("lol hi");
+//
+//            // Send the email
+//            emailSenderService.sendEmail(mailMessage);
+//
+//            return "login";
+//        } else {
+//            return "error";
+//        }
+//
+//    }
 }
