@@ -1,11 +1,13 @@
 package com.example.bb.web;
 
 import com.example.bb.domain.Item;
+import com.example.bb.domain.ItemType;
 import com.example.bb.repository.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +22,15 @@ public class ItemController {
     public @ResponseBody
     List<Item> allItems() {
         return (List<Item>) itemRepository.findAll();
+    }
+
+    // get all item types
+    @GetMapping("/types")
+    public @ResponseBody
+    List<ItemType> allItemTypes() {
+        ItemType[] itemTypes = ItemType.values();
+        List<ItemType> res = Arrays.asList(itemTypes);
+        return res;
     }
 
     // add new item
