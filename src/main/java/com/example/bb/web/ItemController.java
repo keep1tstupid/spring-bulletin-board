@@ -29,8 +29,7 @@ public class ItemController {
     public @ResponseBody
     List<ItemType> allItemTypes() {
         ItemType[] itemTypes = ItemType.values();
-        List<ItemType> res = Arrays.asList(itemTypes);
-        return res;
+        return Arrays.asList(itemTypes);
     }
 
     // add new item

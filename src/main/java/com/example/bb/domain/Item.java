@@ -7,6 +7,9 @@ import javax.persistence.*;
 public class Item {
     private @Id @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
+    @Column(name = "author", nullable = false)
+    private String author;
+
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -14,19 +17,21 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemType type;
 
-    @Column(name = "state", nullable = false)
+    @Column(name = "state", nullable = true)
     @Enumerated(EnumType.STRING)
     private ItemState state;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description", nullable = true)
     private String description;
 
-    @Column(name = "contactInfo", nullable = false)
+    @Column(name = "contactInfo", nullable = true)
     private String contactInfo;
 
     public Item() {}
 
-    public Item(String title, ItemType type, ItemState state, String description, String contactInfo) {
+    public Item(String author, String title, ItemType type,
+                ItemState state, String description, String contactInfo) {
+        this.author = author;
         this.title = title;
         this.type = type;
         this.state = state;
@@ -40,6 +45,14 @@ public class Item {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     public String getTitle() {

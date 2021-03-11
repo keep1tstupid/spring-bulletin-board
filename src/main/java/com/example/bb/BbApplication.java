@@ -28,16 +28,16 @@ public class BbApplication {
                                     RoleRepository roleRepository) {
         return (args) -> {
             itemRepository.save(
-                    new Item("title1", ItemType.NOTE, ItemState.APPROVED,
+                    new Item("leena", "Note my note", ItemType.NOTE, ItemState.APPROVED,
                             "descr1", "contact1"));
-            itemRepository.save(
-                    new Item("title2", ItemType.COMPLAINT, ItemState.APPROVED,
-                            "lorem ipsum", "contact2"));
-            itemRepository.save(
-                    new Item("title3", ItemType.ADVERTISEMENT, ItemState.IN_MODERATION,
-                            "qwertqwerty", "123123123"));
-
-//            User user = new User("test", "lolka@gmail.com", "$2y$12$0rRd4pqPE5hvGte36r3xgulgP40WwFsrqeXJcE8cmmm8y4lUwxfOW ");
+//            itemRepository.save(
+//                    new Item("test", "I tired!", ItemType.COMPLAINT, ItemState.APPROVED,
+//                            "lorem ipsum", "contact2"));
+//            itemRepository.save(
+//                    new Item("rabjana", "Bike for sale", ItemType.ADVERTISEMENT, ItemState.IN_MODERATION,
+//                            "Selling almost new bike", "call me 123123123"));
+//
+//            User user = new User("test", "lolka@gmail.com", "$2y$12$0rRd4pqPE5hvGte36r3xgulgP40WwFsrqeXJcE8cmmm8y4lUwxfOW");
 //            Set<Role> userRoles = new HashSet<>();
 //            userRoles.add(new Role(ROLE_USER));
 //            userRoles.add(new Role(ROLE_ADMIN));
