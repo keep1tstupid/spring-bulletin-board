@@ -27,6 +27,9 @@ public class Item {
     @Column(name = "contactInfo", nullable = true)
     private String contactInfo;
 
+    @Column(name = "photos", nullable = true, length = 64)
+    private String photos;
+
     public Item() {}
 
     public Item(String author, String title, ItemType type,
