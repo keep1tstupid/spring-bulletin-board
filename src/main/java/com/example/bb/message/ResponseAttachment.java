@@ -1,12 +1,12 @@
 package com.example.bb.message;
 
-public class ResponseImage {
+public class ResponseAttachment {
     private String name;
     private String url;
     private String type;
     private long size;
 
-    public ResponseImage(String name, String url, String type, long size) {
+    public ResponseAttachment(String name, String url, String type, long size) {
         this.name = name;
         this.url = url;
         this.type = type;

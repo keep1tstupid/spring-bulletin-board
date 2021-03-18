@@ -1,7 +1,7 @@
 package com.example.bb.service;
 
-import com.example.bb.domain.Image;
-import com.example.bb.repository.ImageRepository;
+import com.example.bb.domain.Attachment;
+import com.example.bb.repository.AttachmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -11,22 +11,22 @@ import java.io.IOException;
 import java.util.stream.Stream;
 
 @Service
-public class ImageStorageService {
+public class AttachmentStorageService {
     @Autowired
-    private ImageRepository imageRepository;
+    private AttachmentRepository imageRepository;
 
-    public Image store(MultipartFile file) throws IOException {
+    public Attachment store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Image FileDB = new Image(fileName, file.getContentType(), file.getBytes());
+        Attachment FileDB = new Attachment(fileName, file.getContentType(), file.getBytes());
 
         return imageRepository.save(FileDB);
     }
 
-    public Image getFile(Long id) {
+    public Attachment getFile(Long id) {
         return imageRepository.findById(id).get();
     }
 
-    public Stream<Image> getAllFiles() {
+    public Stream<Attachment> getAllFiles() {
         return imageRepository.findAll().stream();
     }
 }

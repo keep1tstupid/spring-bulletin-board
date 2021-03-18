@@ -3,8 +3,8 @@ package com.example.bb.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "images")
-public class Image {
+@Table(name = "attachments")
+public class Attachment {
     private @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) Long id;
 
@@ -16,11 +16,13 @@ public class Image {
 
     String name;
 
-    public Image(String name, String type, byte[] data) {
+    public Attachment(String name, String type, byte[] data) {
         this.name = name;
         this.type = type;
         this.data = data;
     }
+
+    public Attachment() {}
 
     public Long getId() {
         return id;

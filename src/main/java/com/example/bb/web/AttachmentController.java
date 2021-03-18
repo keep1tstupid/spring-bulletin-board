@@ -1,10 +1,9 @@
 package com.example.bb.web;
 
-
-import com.example.bb.domain.Image;
-import com.example.bb.message.ResponseImage;
+import com.example.bb.domain.Attachment;
+import com.example.bb.message.ResponseAttachment;
 import com.example.bb.message.ResponseMessage;
-import com.example.bb.service.ImageStorageService;
+import com.example.bb.service.AttachmentStorageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -15,24 +14,36 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
 @CrossOrigin("http://localhost:8081")
-public class ImageController {
+public class AttachmentController {
 
     @Autowired
-    private ImageStorageService storageService;
-
+    private AttachmentStorageService storageService;
 
     @PostMapping("/upload")
-    public ResponseEntity<ResponseMessage> uploadFile(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<ResponseMessage> uploadFile(
+//            @RequestParam("file")
+                    MultipartFile file) {
         String message = "";
         try {
             storageService.store(file);
-
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
+
+            String cwd = Paths.get("").toAbsolutePath().toString();
+            File newFile = new File(cwd + "/files/" + file.getOriginalFilename());
+            newFile.createNewFile();
+
+            FileOutputStream fout = new FileOutputStream(newFile);
+            fout.write(file.getBytes());
+            fout.close();
+
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
@@ -41,15 +52,15 @@ public class ImageController {
     }
 
     @GetMapping("/files")
-    public ResponseEntity<List<ResponseImage>> getListFiles() {
-        List<ResponseImage> files = storageService.getAllFiles().map(dbFile -> {
+    public ResponseEntity<List<ResponseAttachment>> getListFiles() {
+        List<ResponseAttachment> files = storageService.getAllFiles().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
                     .fromCurrentContextPath()
                     .path("/files/")
                     .path(dbFile.getId().toString())
                     .toUriString();
 
-            return new ResponseImage(
+            return new ResponseAttachment(
                     dbFile.getName(),
                     fileDownloadUri,
                     dbFile.getType(),
@@ -61,7 +72,7 @@ public class ImageController {
 
     @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
-        Image fileDB = storageService.getFile(id);
+        Attachment fileDB = storageService.getFile(id);
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDB.getName() + "\"")
