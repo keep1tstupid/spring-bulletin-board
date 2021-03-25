@@ -27,8 +27,8 @@ public class Item {
     @Column(name = "contactInfo", nullable = true)
     private String contactInfo;
 
-    @Column(name = "photos", nullable = true, length = 64)
-    private String photos;
+    @Column(name = "attachmentId", nullable = true, length = 64)
+    private Long attachmentId;
 
     public Item() {}
 
@@ -96,6 +96,14 @@ public class Item {
 
     public void setContactInfo(String contactInfo) {
         this.contactInfo = contactInfo;
+    }
+
+    public Long getAttachmentId() {
+        return attachmentId;
+    }
+
+    public void setAttachmentId(Long attachmentId) {
+        this.attachmentId = attachmentId;
     }
 
     @Override

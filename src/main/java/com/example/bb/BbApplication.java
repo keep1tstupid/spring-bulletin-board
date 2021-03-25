@@ -27,11 +27,11 @@ public class BbApplication {
                                     UserRepository userRepository,
                                     RoleRepository roleRepository) {
         return (args) -> {
-            itemRepository.save(
-                    new Item("leena", "Note my note", ItemType.NOTE, ItemState.APPROVED,
-                            "descr1", "contact1"));
 //            itemRepository.save(
-//                    new Item("test", "I tired!", ItemType.COMPLAINT, ItemState.APPROVED,
+//                    new Item("leena", "Note my note", ItemType.NOTE, ItemState.APPROVED,
+//                            "descr1", "contact1"));
+//            itemRepository.save(
+//                    new Item("test", "I tired!", ItemType.ADVERTISEMENT, ItemState.APPROVED,
 //                            "lorem ipsum", "contact2"));
 //            itemRepository.save(
 //                    new Item("rabjana", "Bike for sale", ItemType.ADVERTISEMENT, ItemState.IN_MODERATION,

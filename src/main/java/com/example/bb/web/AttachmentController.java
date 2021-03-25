@@ -1,8 +1,11 @@
 package com.example.bb.web;
 
 import com.example.bb.domain.Attachment;
+import com.example.bb.domain.Item;
 import com.example.bb.message.ResponseAttachment;
 import com.example.bb.message.ResponseMessage;
+import com.example.bb.repository.AttachmentRepository;
+import com.example.bb.repository.ItemRepository;
 import com.example.bb.service.AttachmentStorageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +21,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -27,18 +31,34 @@ public class AttachmentController {
     @Autowired
     private AttachmentStorageService storageService;
 
+    @Autowired
+    AttachmentRepository attachmentRepository;
+
+    @Autowired
+    ItemRepository itemRepository;
+
     @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(
-//            @RequestParam("file")
-                    MultipartFile file) {
+            //@RequestParam("file")
+            MultipartFile file,
+                    @RequestParam Long id) {
         String message = "";
         try {
-            storageService.store(file);
-            message = "Uploaded the file successfully: " + file.getOriginalFilename();
+            Attachment current = storageService.store(file);
+            message = "Uploaded the file successfully: " + file.getOriginalFilename() + " Assigned id: " +
+                    current.getId();
+
+            //message = "Uploaded the file successfully: " + file.getOriginalFilename();
 
             String cwd = Paths.get("").toAbsolutePath().toString();
             File newFile = new File(cwd + "/files/" + file.getOriginalFilename());
             newFile.createNewFile();
+
+            Optional<Item> targetItem = itemRepository.findById(id);
+            targetItem.ifPresent(item -> {
+                item.setAttachmentId(current.getId());
+                itemRepository.save(item);
+            });
 
             FileOutputStream fout = new FileOutputStream(newFile);
             fout.write(file.getBytes());
@@ -46,7 +66,7 @@ public class AttachmentController {
 
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
         } catch (Exception e) {
-            message = "Could not upload the file: " + file.getOriginalFilename() + "!";
+            message = "Could not upload the file: " + file.getOriginalFilename() + "!" + e.getMessage();
             return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
         }
     }

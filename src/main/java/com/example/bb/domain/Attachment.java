@@ -1,6 +1,7 @@
 package com.example.bb.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "attachments")
@@ -14,7 +15,9 @@ public class Attachment {
 
     private String type;
 
-    String name;
+    private String name;
+
+    private Date uploadingTime = new Date();
 
     public Attachment(String name, String type, byte[] data) {
         this.name = name;

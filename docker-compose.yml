@@ -3,7 +3,7 @@ services:
   bb-database:
     image: postgres
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/compose-postgres
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/bbbase
       - POSTGRES_DB=bbbase
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
