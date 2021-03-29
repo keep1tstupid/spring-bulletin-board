@@ -37,7 +37,7 @@ public class AttachmentController {
     @Autowired
     ItemRepository itemRepository;
 
-    @PostMapping("/upload")
+    @PostMapping("/api/upload")
     public ResponseEntity<ResponseMessage> uploadFile(
             //@RequestParam("file")
             MultipartFile file,
@@ -71,7 +71,7 @@ public class AttachmentController {
         }
     }
 
-    @GetMapping("/files")
+    @GetMapping("/api/files")
     public ResponseEntity<List<ResponseAttachment>> getListFiles() {
         List<ResponseAttachment> files = storageService.getAllFiles().map(dbFile -> {
             String fileDownloadUri = ServletUriComponentsBuilder
@@ -81,6 +81,7 @@ public class AttachmentController {
                     .toUriString();
 
             return new ResponseAttachment(
+                    dbFile.getId(),
                     dbFile.getName(),
                     fileDownloadUri,
                     dbFile.getType(),
@@ -90,7 +91,7 @@ public class AttachmentController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    @GetMapping("/files/{id}")
+    @GetMapping("/api/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
         Attachment fileDB = storageService.getFile(id);
 

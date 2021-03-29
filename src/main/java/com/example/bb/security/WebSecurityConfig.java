@@ -18,6 +18,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+
+// todo: update all api urls to make it easier to allow using those with no 401
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -65,10 +68,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 			.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 			.authorizeRequests().antMatchers("/api/auth/**").permitAll()
-			.antMatchers("/items", "/types", "/items/**", "/upload" ).permitAll()
+			.antMatchers("/api/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 	}
 
-}
+}/// "/types", "/items/**", "/upload", "/files/**"

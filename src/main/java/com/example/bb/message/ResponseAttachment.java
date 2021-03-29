@@ -1,16 +1,26 @@
 package com.example.bb.message;
 
 public class ResponseAttachment {
+    private Long id;
     private String name;
     private String url;
     private String type;
     private long size;
 
-    public ResponseAttachment(String name, String url, String type, long size) {
+    public ResponseAttachment(Long id, String name, String url, String type, long size) {
+        this.id = id;
         this.name = name;
         this.url = url;
         this.type = type;
         this.size = size;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

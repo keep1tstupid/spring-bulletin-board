@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/api")
 // @CrossOrigin("*")
 public class ItemController {
     @Autowired
@@ -37,8 +38,6 @@ public class ItemController {
     Item addItem(@RequestBody Item newItem) {
         return itemRepository.save(newItem);
     }
-
-    // add new item with image?
 
 
     //update item
