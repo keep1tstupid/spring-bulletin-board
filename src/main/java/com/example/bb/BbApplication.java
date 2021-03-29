@@ -18,6 +18,8 @@ import static com.example.bb.domain.ERole.ROLE_USER;
 @SpringBootApplication
 public class BbApplication {
 
+    // todo : add tests!!!
+
     public static void main(String[] args) {
         SpringApplication.run(BbApplication.class, args);
     }

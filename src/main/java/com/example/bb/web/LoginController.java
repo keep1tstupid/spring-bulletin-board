@@ -52,7 +52,6 @@ public class LoginController {
     @Autowired
     JwtUtils jwtUtils;
 
-
     // view for testing
     @GetMapping("/test")
     public String test() {
@@ -60,7 +59,7 @@ public class LoginController {
     }
 
 
-    //POST api/auth/signin for User Login
+    //POST api/auth/signin for login
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 

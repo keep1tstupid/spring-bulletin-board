@@ -37,18 +37,17 @@ public class AttachmentController {
     @Autowired
     ItemRepository itemRepository;
 
+    // method to add new file and link it to appropriate item
     @PostMapping("/api/upload")
     public ResponseEntity<ResponseMessage> uploadFile(
             //@RequestParam("file")
             MultipartFile file,
-                    @RequestParam Long id) {
+            @RequestParam Long id) {
         String message = "";
         try {
             Attachment current = storageService.store(file);
             message = "Uploaded the file successfully: " + file.getOriginalFilename() + " Assigned id: " +
                     current.getId();
-
-            //message = "Uploaded the file successfully: " + file.getOriginalFilename();
 
             String cwd = Paths.get("").toAbsolutePath().toString();
             File newFile = new File(cwd + "/files/" + file.getOriginalFilename());
@@ -71,6 +70,7 @@ public class AttachmentController {
         }
     }
 
+    // get all files
     @GetMapping("/api/files")
     public ResponseEntity<List<ResponseAttachment>> getListFiles() {
         List<ResponseAttachment> files = storageService.getAllFiles().map(dbFile -> {
@@ -91,6 +91,7 @@ public class AttachmentController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
+    // get certain file
     @GetMapping("/api/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
         Attachment fileDB = storageService.getFile(id);
