@@ -37,13 +37,17 @@ public class BbApplication {
 //                    new Item("rabjana", "Bike for sale", ItemType.ADVERTISEMENT, ItemState.IN_MODERATION,
 //                            "Selling almost new bike", "call me 123123123"));
 //
-//            User user = new User("test", "lolka@gmail.com", "$2y$12$0rRd4pqPE5hvGte36r3xgulgP40WwFsrqeXJcE8cmmm8y4lUwxfOW");
+//            User user = new User("adm", "lolka@gmail.com", "$2y$12$0rRd4pqPE5hvGte36r3xgulgP40WwFsrqeXJcE8cmmm8y4lUwxfOW");
 //            Set<Role> userRoles = new HashSet<>();
-//            userRoles.add(new Role(ROLE_USER));
 //            userRoles.add(new Role(ROLE_ADMIN));
 //            user.setRoles(userRoles);
-//
 //            userRepository.save(user);
+//
+//            User user2 = new User("user", "user@gmail.com", "$2y$12$0rRd4pqPE5hvGte36r3xgulgP40WwFsrqeXJcE8cmmm8y4lUwxfOW");
+//            Set<Role> user2Roles = new HashSet<>();
+//            user2Roles.add(new Role(ROLE_USER));
+//            user2.setRoles(user2Roles);
+//            userRepository.save(user2);
         };
     }
 }

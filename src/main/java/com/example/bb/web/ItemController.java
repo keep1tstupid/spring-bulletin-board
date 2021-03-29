@@ -50,6 +50,7 @@ public class ItemController {
                     item.setType(newItem.getType());
                     item.setDescription(newItem.getDescription());
                     item.setContactInfo(newItem.getContactInfo());
+                    item.setState(newItem.getState());
                     return itemRepository.save(item);
                 });
     }
