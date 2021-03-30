@@ -40,7 +40,6 @@ public class Attachment {
         this.id = id;
     }
 
-
     public String getName() {
         return name;
     }

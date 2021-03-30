@@ -14,5 +14,4 @@ public class ResponseMessage {
     public void setMessage(String message) {
         this.message = message;
     }
-
 }

@@ -7,8 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class UserDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
@@ -31,10 +30,6 @@ public class UserDetailsImpl implements UserDetails {
     }
 
     public static UserDetailsImpl build(User user) {
-//        List<GrantedAuthority> authorities = user.getRoles().stream()
-//                .map(role -> new SimpleGrantedAuthority(role.getName().name()))
-//                .collect(Collectors.toList());
-
         GrantedAuthority authority = new SimpleGrantedAuthority(user.getRole().getAuthority());
 
         return new UserDetailsImpl(
@@ -52,11 +47,6 @@ public class UserDetailsImpl implements UserDetails {
     public String getEmail() {
         return email;
     }
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        return authorities;
-//    }
 
     public GrantedAuthority getAuthority() {
         return authority;
@@ -96,5 +86,4 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-
 }

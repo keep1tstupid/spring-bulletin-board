@@ -1,6 +1,4 @@
 package com.example.bb.web;
-import com.example.bb.domain.ConfirmationToken;
-import com.example.bb.domain.User;
 import com.example.bb.payload.request.LoginRequest;
 import com.example.bb.payload.response.JwtResponse;
 import com.example.bb.repository.ConfirmationTokenRepository;
@@ -9,11 +7,6 @@ import com.example.bb.security.jwt.JwtUtils;
 import com.example.bb.service.EmailSenderService;
 
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 
 import com.example.bb.service.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,10 +36,6 @@ public class LoginController {
     @Autowired
     EmailSenderService emailSenderService;
 
-
-//    @Autowired
-//    RoleRepository roleRepository;
-
     @Autowired
     PasswordEncoder encoder;
 
@@ -74,9 +63,6 @@ public class LoginController {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//        List<String> roles = userDetails.getAuthorities().stream()
-//                .map(item -> item.getAuthority())
-//                .collect(Collectors.toList());
 
         String role = userDetails.getAuthority().toString();
 
