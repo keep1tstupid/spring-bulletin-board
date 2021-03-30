@@ -61,12 +61,14 @@ public class ItemController {
         return itemRepository.findById(itemId);
     }
 
-    // get item by type
-    @GetMapping("/items/{type}")
-    public @ResponseBody
-    List<Item> findItem(@PathVariable("type") String type) {
-        return itemRepository.findByType(type);
-    }
+
+    // todo: it should work with ItemType, not string
+//    // get item by type
+//    @GetMapping("/items/{type}")
+//    public @ResponseBody
+//    List<Item> findItem(@PathVariable("type") String type) {
+//        return itemRepository.findByType(type);
+//    }
 
     // delete item by id
     @DeleteMapping("/items/{id}")

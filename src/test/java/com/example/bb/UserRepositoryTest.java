@@ -38,7 +38,7 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void deleteUser() {
+    public void deleteUserTest() {
         Optional<User> user = userRepository.findByUsername("user");
         assertThat(user.isPresent());
         user.ifPresent(u -> {
