@@ -11,9 +11,6 @@ public class Role {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-//    @ManyToMany(mappedBy = "roles")
-//    Set<User> users = new HashSet<>();
-
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
     private ERole name;
