@@ -8,5 +8,4 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 @Transactional
 public interface AttachmentRepository extends JpaRepository<Attachment, Long> {
-   Attachment findByName(String name);
 }

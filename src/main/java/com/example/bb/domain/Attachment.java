@@ -25,6 +25,11 @@ public class Attachment {
         this.data = data;
     }
 
+    // constructor for test
+    public Attachment(String name) {
+        this.name = name;
+    }
+
     public Attachment() {}
 
     public Long getId() {
