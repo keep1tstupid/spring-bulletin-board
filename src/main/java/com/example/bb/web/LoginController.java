@@ -8,6 +8,7 @@ import com.example.bb.repository.UserRepository;
 import com.example.bb.security.jwt.JwtUtils;
 import com.example.bb.service.EmailSenderService;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -73,14 +74,16 @@ public class LoginController {
         String jwt = jwtUtils.generateJwtToken(authentication);
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
+//        List<String> roles = userDetails.getAuthorities().stream()
+//                .map(item -> item.getAuthority())
+//                .collect(Collectors.toList());
+
+        String role = userDetails.getAuthority().toString();
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
                 userDetails.getEmail(),
-                roles));
+                Collections.singletonList(role)));
     }
 }

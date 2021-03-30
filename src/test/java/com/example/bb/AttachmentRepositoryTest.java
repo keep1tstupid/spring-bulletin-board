@@ -2,7 +2,6 @@ package com.example.bb;
 
 import com.example.bb.domain.Attachment;
 import com.example.bb.repository.AttachmentRepository;
-import org.checkerframework.checker.units.qual.A;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

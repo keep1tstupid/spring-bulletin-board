@@ -18,17 +18,15 @@ public class User {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "roles", nullable = false)
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(	name = "user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     public User() {}
 
-    public User(String username, String email, String password) {
+    public User(String username, Role role, String email, String password) {
         this.username = username;
+        this.role = role;
         this.email = email;
         this.password = password;
     }
@@ -65,12 +63,12 @@ public class User {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public Role getRole() {
+        return role;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setRole(Role role) {
+        this.role = role;
     }
 
     @Override
