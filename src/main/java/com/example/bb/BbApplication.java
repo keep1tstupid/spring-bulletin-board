@@ -15,6 +15,8 @@ import java.util.Set;
 
 import static com.example.bb.domain.Role.*;
 
+// todo: add tests for controllers
+// todo: comments for complicated parts of project
 
 @SpringBootApplication
 public class BbApplication {

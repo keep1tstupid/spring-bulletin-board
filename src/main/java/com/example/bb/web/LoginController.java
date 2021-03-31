@@ -4,7 +4,7 @@ import com.example.bb.payload.response.JwtResponse;
 import com.example.bb.repository.ConfirmationTokenRepository;
 import com.example.bb.repository.UserRepository;
 import com.example.bb.security.jwt.JwtUtils;
-import com.example.bb.service.EmailSenderService;
+import com.example.bb.service._EmailSenderService;
 
 import java.util.Collections;
 
@@ -34,7 +34,7 @@ public class LoginController {
     ConfirmationTokenRepository confirmationTokenRepository;
 
     @Autowired
-    EmailSenderService emailSenderService;
+    _EmailSenderService emailSenderService;
 
     @Autowired
     PasswordEncoder encoder;
