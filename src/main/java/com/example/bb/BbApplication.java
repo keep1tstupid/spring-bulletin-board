@@ -17,6 +17,7 @@ import static com.example.bb.domain.Role.*;
 
 // todo: add tests for controllers
 // todo: comments for complicated parts of project
+// todo: do nothing
 
 @SpringBootApplication
 public class BbApplication {
