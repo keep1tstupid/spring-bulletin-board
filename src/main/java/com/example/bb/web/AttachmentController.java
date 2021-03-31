@@ -25,7 +25,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
-@CrossOrigin("http://localhost:8081")
+@CrossOrigin("https://bb-front-app.herokuapp.com/")
+        //("http://localhost:8081")
 public class AttachmentController {
 
     @Autowired
