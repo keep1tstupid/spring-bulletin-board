@@ -43,3 +43,4 @@ public class UserRepositoryTest {
         assertThat(!user2.isPresent());
     }
 }
+

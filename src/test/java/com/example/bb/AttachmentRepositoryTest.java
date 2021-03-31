@@ -22,14 +22,14 @@ public class AttachmentRepositoryTest {
         assertThat(attachmentRepository.findById(attachment.getId()).isPresent());
     }
 
-//    @Test
-//    public void deleteAttachmentTest() {
-//        Attachment attachment = new Attachment("Test attachment");
-//        attachmentRepository.save(attachment);
-//        assertThat(attachmentRepository.findById(attachment.getId()).isPresent());
-//        attachmentRepository.delete(attachment);
-//        assertThat(attachmentRepository.findById(attachment.getId()).isEmpty());
-//    }
+    @Test
+    public void deleteAttachmentTest() {
+        Attachment attachment = new Attachment("Test attachment");
+        attachmentRepository.save(attachment);
+        assertThat(attachmentRepository.findById(attachment.getId()).isPresent());
+        attachmentRepository.delete(attachment);
+        assertThat(!attachmentRepository.findById(attachment.getId()).isPresent());
+    }
 
     @Test
     public void findAllAttachmentsTest() {
