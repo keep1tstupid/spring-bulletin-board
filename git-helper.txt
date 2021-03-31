@@ -1,0 +1,12 @@
+
+add branch >> git checkout -b <branchname>
+switch branch >> git checkout <branchname>
+remove branch >> git branch -D <branchname>
+
+check current brunch >> git branch
+
+after every checkout (with no -b flag) >> git pull
+
+get new branches >> git fetch --all
+
+
