@@ -28,7 +28,7 @@ public class AttachmentRepositoryTest {
         attachmentRepository.save(attachment);
         assertThat(attachmentRepository.findById(attachment.getId()).isPresent());
         attachmentRepository.delete(attachment);
-        assertThat(attachmentRepository.findById(attachment.getId()).isEmpty());
+        assertThat(!attachmentRepository.findById(attachment.getId()).isPresent());
     }
 
     @Test
