@@ -45,6 +45,6 @@ public class ItemRepositoryTest {
             itemRepository.deleteById(i.getId());
         });
         Optional<Item> deletedItem = itemRepository.findByTitle("Test");
-        assertThat(deletedItem.isEmpty());
+        assertThat(!deletedItem.isPresent());
     }
 }

@@ -40,6 +40,6 @@ public class UserRepositoryTest {
             userRepository.deleteById(u.getId());
         });
         Optional<User> user2 = userRepository.findByUsername("test");
-        assertThat(user2.isEmpty());
+        assertThat(!user2.isPresent());
     }
 }
