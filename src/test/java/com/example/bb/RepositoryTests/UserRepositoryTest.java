@@ -1,4 +1,4 @@
-package com.example.bb;
+package com.example.bb.RepositoryTests;
 
 
 import com.example.bb.domain.User;

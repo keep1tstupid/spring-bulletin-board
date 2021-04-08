@@ -1,4 +1,4 @@
-package com.example.bb;
+package com.example.bb.RepositoryTests;
 
 import com.example.bb.domain.Attachment;
 import com.example.bb.repository.AttachmentRepository;

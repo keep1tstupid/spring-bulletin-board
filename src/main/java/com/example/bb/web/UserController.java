@@ -1,6 +1,5 @@
 package com.example.bb.web;
 
-
 import com.example.bb.domain.User;
 import com.example.bb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
