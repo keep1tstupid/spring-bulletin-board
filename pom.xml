@@ -92,12 +92,12 @@
             <artifactId>spring-boot-test</artifactId>
             <version>2.2.2.RELEASE</version>
         </dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>bb</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.example</groupId>-->
+<!--            <artifactId>bb</artifactId>-->
+<!--            <version>0.0.1-SNAPSHOT</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
