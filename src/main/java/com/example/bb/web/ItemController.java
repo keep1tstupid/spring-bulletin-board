@@ -54,7 +54,7 @@ public class ItemController {
     }
 
     // get item by id
-    @GetMapping("/item/{id}")
+    @GetMapping("/items/{id}")
     public @ResponseBody
     Optional<Item> findItem(@PathVariable("id") Long itemId) {
         return itemRepository.findById(itemId);
