@@ -42,13 +42,6 @@ public class LoginController {
     @Autowired
     JwtUtils jwtUtils;
 
-    // view for testing
-    @GetMapping("/test")
-    public String test() {
-        return "testView";
-    }
-
-
     //POST api/auth/signin for login
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
