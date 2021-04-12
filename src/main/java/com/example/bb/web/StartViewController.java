@@ -4,10 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class TestController {
-    // view for testing
-    @GetMapping("/test")
-    public String test() {
-        return "testView";
-    }
+public class StartViewController {
+    @GetMapping("/")
+    public String start() { return "testView"; }
 }
