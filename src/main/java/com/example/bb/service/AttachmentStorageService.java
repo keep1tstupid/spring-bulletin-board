@@ -15,21 +15,21 @@ import java.util.stream.Stream;
 @Service
 public class AttachmentStorageService {
     @Autowired
-    private AttachmentRepository imageRepository;
+    private AttachmentRepository attachmentRepository;
 
     @Transactional
     public Attachment store(MultipartFile file) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Attachment FileDB = new Attachment(fileName, file.getContentType(), file.getBytes());
 
-        return imageRepository.save(FileDB);
+        return attachmentRepository.save(FileDB);
     }
 
     public Attachment getFile(Long id) {
-        return imageRepository.findById(id).get();
+        return attachmentRepository.findById(id).get();
     }
 
     public Stream<Attachment> getAllFiles() {
-        return imageRepository.findAll().stream();
+        return attachmentRepository.findAll().stream();
     }
 }

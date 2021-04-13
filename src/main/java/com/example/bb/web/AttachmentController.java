@@ -8,6 +8,10 @@ import com.example.bb.repository.AttachmentRepository;
 import com.example.bb.repository.ItemRepository;
 import com.example.bb.service.AttachmentStorageService;
 
+import com.google.cloud.storage.*;
+
+import org.apache.tomcat.util.http.fileupload.FileItemStream;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,9 +21,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import javax.servlet.ServletException;
+import javax.servlet.http.Part;
+import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,6 +45,30 @@ public class AttachmentController {
     @Autowired
     ItemRepository itemRepository;
 
+    @Autowired
+    private Storage storage;
+
+    private void checkFileExtension(String fileName) throws ServletException {
+        if (fileName != null && !fileName.isEmpty() && fileName.contains(".")) {
+            String[]allowedExt = {".jpg", ".jpeg", ".png", ".gif"};
+            for (String ext:allowedExt) {
+                if(fileName.endsWith(ext)) {
+                    return;
+                }
+            }
+            throw new ServletException("file must be an image");
+        }
+    }
+
+        private File convertMultiPartToFile(MultipartFile file) throws IOException {
+        File convFile = new File(file.getOriginalFilename());
+        FileOutputStream fos = new FileOutputStream(convFile);
+        fos.write(file.getBytes());
+        fos.close();
+        return convFile;
+    }
+
+
     // method to add new file and link it to appropriate item
     @PostMapping("/api/upload")
     public ResponseEntity<ResponseMessage> uploadFile(
@@ -46,12 +78,25 @@ public class AttachmentController {
         String message = "";
         try {
             Attachment current = storageService.store(file);
+            checkFileExtension(current.getName());
             message = "Uploaded the file successfully: " + file.getOriginalFilename() + " Assigned id: " +
                     current.getId();
 
             String cwd = Paths.get("").toAbsolutePath().toString();
             File newFile = new File(cwd + "/files/" + file.getOriginalFilename());
             newFile.createNewFile();
+
+
+            // test cloud
+            String bucketName="spring-bucket-test-lolka";
+            String storageFileName = current.getName();
+            InputStream fileStream = new FileInputStream(convertMultiPartToFile(file));
+
+            BlobInfo blobInfo = storage.create(BlobInfo.newBuilder(bucketName, storageFileName)
+                            .setAcl(new ArrayList<>(Arrays.asList(Acl.of(Acl.User.ofAllUsers(), Acl.Role.READER))))
+                            .build(), fileStream);
+
+            System.out.println(blobInfo.getMediaLink());
 
             Optional<Item> targetItem = itemRepository.findById(id);
             targetItem.ifPresent(item -> {
