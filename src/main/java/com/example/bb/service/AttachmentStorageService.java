@@ -18,9 +18,9 @@ public class AttachmentStorageService {
     private AttachmentRepository attachmentRepository;
 
     @Transactional
-    public Attachment store(MultipartFile file) throws IOException {
+    public Attachment store(MultipartFile file, String storageFileName) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Attachment FileDB = new Attachment(fileName, file.getContentType(), file.getBytes());
+        Attachment FileDB = new Attachment(fileName, file.getContentType(), file.getBytes(), storageFileName);
 
         return attachmentRepository.save(FileDB);
     }

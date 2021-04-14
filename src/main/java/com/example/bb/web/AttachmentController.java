@@ -24,6 +24,7 @@ import java.io.*;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Controller
@@ -41,6 +42,9 @@ public class AttachmentController {
 
     @Autowired
     private Storage storage;
+
+    private String bucketName = "spring-bucket-test-lolka";
+
 
     private boolean checkFileExtension(String fileName) throws ServletException {
         if (fileName != null && !fileName.isEmpty() && fileName.contains(".")) {
@@ -62,15 +66,15 @@ public class AttachmentController {
             MultipartFile file,
             @RequestParam Long id) throws ServletException {
 
+        UUID uuid = UUID.randomUUID();
         String message = "";
         String fileName = file.getOriginalFilename();
-        String bucketName = "spring-bucket-test-lolka";
+        String storageFileName = uuid + fileName;
 
         // if format of file is ok
         if (checkFileExtension(fileName)) {
 
             //go and try to save in cloud
-            String storageFileName = fileName;
             try {
                 BlobInfo blobInfo = storage.create(
                         BlobInfo.newBuilder(bucketName, storageFileName).setContentType("image/jpeg").build(),
@@ -85,14 +89,9 @@ public class AttachmentController {
 
             // if uploaded to cloud, go and save in db
             try {
-                Attachment current = storageService.store(file);
+                Attachment current = storageService.store(file, storageFileName);
                 message = "Saved in DB successfully: " + fileName + " Assigned id: " +
                         current.getId();
-
-                // saving locally
-//                String cwd = Paths.get("").toAbsolutePath().toString();
-//                File newFile = new File(cwd + "/files/" + file.getOriginalFilename());
-//                newFile.createNewFile();
 
                 // update item with attachment Id
                 Optional<Item> targetItem = itemRepository.findById(id);
@@ -100,10 +99,6 @@ public class AttachmentController {
                     item.setAttachmentId(current.getId());
                     itemRepository.save(item);
                 });
-
-//                FileOutputStream fout = new FileOutputStream(newFile);
-//                fout.write(file.getBytes());
-//                fout.close();
 
                 return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
             } catch (Exception e) {
@@ -116,46 +111,22 @@ public class AttachmentController {
         return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
     }
 
-//        try {
-//            Attachment current = storageService.store(file);
-//            message = "Uploaded the file successfully: " + fileName + " Assigned id: " +
-//                    current.getId();
-//
-//            String cwd = Paths.get("").toAbsolutePath().toString();
-//            File newFile = new File(cwd + "/files/" + file.getOriginalFilename());
-//            newFile.createNewFile();
-//
-//            Optional<Item> targetItem = itemRepository.findById(id);
-//            targetItem.ifPresent(item -> {
-//                item.setAttachmentId(current.getId());
-//                itemRepository.save(item);
-//            });
-//
-//            FileOutputStream fout = new FileOutputStream(newFile);
-//            fout.write(file.getBytes());
-//            fout.close();
-//
-//            return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
-//        } catch (Exception e) {
-//            message = "Could not upload the file: " + file.getOriginalFilename() + "!" + e.getMessage();
-//            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new ResponseMessage(message));
-//        }
-//    }
-
     // get all files
     @GetMapping("/api/files")
     public ResponseEntity<List<ResponseAttachment>> getListFiles() {
         List<ResponseAttachment> files = storageService.getAllFiles().map(dbFile -> {
-            String fileDownloadUri = ServletUriComponentsBuilder
-                    .fromCurrentContextPath()
-                    .path("/files/")
-                    .path(dbFile.getId().toString())
-                    .toUriString();
+//            String fileUrl = ServletUriComponentsBuilder
+//                    .fromCurrentContextPath()
+//                    .path("/files/")
+//                    .path(dbFile.getId().toString())
+//                    .toUriString();
+
+            String fileUrl = "https://storage.googleapis.com/" + bucketName + "/" + dbFile.getUrl();
 
             return new ResponseAttachment(
                     dbFile.getId(),
                     dbFile.getName(),
-                    fileDownloadUri,
+                    fileUrl,
                     dbFile.getType(),
                     dbFile.getData().length);
         }).collect(Collectors.toList());
