@@ -17,11 +17,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.servlet.ServletException;
-import java.io.*;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,7 +40,7 @@ public class AttachmentController {
     @Autowired
     private Storage storage;
 
-    private String bucketName = "spring-bucket-test-lolka";
+    private String bucketName = "bb-app-bucket";
 
     private boolean checkFileExtension(String fileName) {
         if (fileName != null && !fileName.isEmpty() && fileName.contains(".")) {
@@ -78,7 +75,7 @@ public class AttachmentController {
                         BlobInfo.newBuilder(bucketName, storageFileName).setContentType("image/jpeg").build(),
                         file.getBytes()
                 );
-                System.out.println(blobInfo.getMediaLink());
+                //System.out.println(blobInfo.getMediaLink());
             } catch (Exception e) {
                 System.out.println(e);
                 message = "Problem occurred during saving to the cloud";

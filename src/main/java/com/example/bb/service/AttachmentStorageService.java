@@ -25,7 +25,6 @@ public class AttachmentStorageService {
                 file.getContentType(),
                 file.getBytes(),
                 storageFileName);
-
         return attachmentRepository.save(FileDB);
     }
 
