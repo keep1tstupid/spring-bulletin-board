@@ -20,7 +20,11 @@ public class AttachmentStorageService {
     @Transactional
     public Attachment store(MultipartFile file, String storageFileName) throws IOException {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        Attachment FileDB = new Attachment(fileName, file.getContentType(), file.getBytes(), storageFileName);
+        Attachment FileDB = new Attachment(
+                fileName,
+                file.getContentType(),
+                file.getBytes(),
+                storageFileName);
 
         return attachmentRepository.save(FileDB);
     }

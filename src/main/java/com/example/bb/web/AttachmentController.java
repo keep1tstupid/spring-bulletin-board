@@ -45,8 +45,7 @@ public class AttachmentController {
 
     private String bucketName = "spring-bucket-test-lolka";
 
-
-    private boolean checkFileExtension(String fileName) throws ServletException {
+    private boolean checkFileExtension(String fileName) {
         if (fileName != null && !fileName.isEmpty() && fileName.contains(".")) {
             String[] allowedExt = {".jpg", ".jpeg", ".png", ".gif"};
             for (String ext:allowedExt) {
@@ -54,7 +53,6 @@ public class AttachmentController {
                     return true;
                 }
             }
-            throw new ServletException("file must be an image");
         }
         return false;
     }
@@ -115,12 +113,6 @@ public class AttachmentController {
     @GetMapping("/api/files")
     public ResponseEntity<List<ResponseAttachment>> getListFiles() {
         List<ResponseAttachment> files = storageService.getAllFiles().map(dbFile -> {
-//            String fileUrl = ServletUriComponentsBuilder
-//                    .fromCurrentContextPath()
-//                    .path("/files/")
-//                    .path(dbFile.getId().toString())
-//                    .toUriString();
-
             String fileUrl = "https://storage.googleapis.com/" + bucketName + "/" + dbFile.getUrl();
 
             return new ResponseAttachment(
@@ -134,7 +126,7 @@ public class AttachmentController {
         return ResponseEntity.status(HttpStatus.OK).body(files);
     }
 
-    // get certain file
+    // get certain file --- not in use
     @GetMapping("/api/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
         Attachment fileDB = storageService.getFile(id);
