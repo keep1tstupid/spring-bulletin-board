@@ -51,6 +51,10 @@ Content-Type: application/json
 
 **GET "/api/items/{id}"** >> get item by id 
 
+```
+
+```
+
 **GET "/api/types"** >> get all item types, returns values from ItemTypes enum
 
 Content-Type: application/json
