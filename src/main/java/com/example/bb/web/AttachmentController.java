@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 
 
 @Controller
+@RequestMapping("/api")
 @CrossOrigin("*")
 public class AttachmentController {
 
@@ -56,7 +57,7 @@ public class AttachmentController {
     }
 
     // method to add new file and link it to appropriate item
-    @PostMapping("/api/upload")
+    @PostMapping("/upload")
     public ResponseEntity<ResponseMessage> uploadFile(
             //@RequestParam("file")
             MultipartFile file,
@@ -108,7 +109,7 @@ public class AttachmentController {
     }
 
     // get all files
-    @GetMapping("/api/files")
+    @GetMapping("/files")
     public ResponseEntity<List<ResponseAttachment>> getListFiles() {
         List<ResponseAttachment> files = storageService.getAllFiles().map(dbFile -> {
             String fileUrl = "https://storage.googleapis.com/" + bucketName + "/" + dbFile.getUrl();
@@ -125,7 +126,7 @@ public class AttachmentController {
     }
 
     // get certain file --- not in use
-    @GetMapping("/api/files/{id}")
+    @GetMapping("/files/{id}")
     public ResponseEntity<byte[]> getFile(@PathVariable Long id) {
         Attachment fileDB = storageService.getFile(id);
 
