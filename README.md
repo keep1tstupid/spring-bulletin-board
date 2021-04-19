@@ -10,11 +10,16 @@ The application provides an API for a separate front-end part (see another proje
 * *PostgreSQL* to store data 
 * *Google Cloud Storage* to store and access files (attachments)
 
-#### API Documentation. 
 
+
+### API Documentation. 
+
+<hr />
 Authentication:
 
 **POST "/api/auth/signin"** >> for login
+
+<hr />
 
 Items:
 
@@ -51,6 +56,8 @@ Content-Type: application/json
 
 **DELETE "/api/items/{id}"** >> delete item
 
+<hr />
+
 Attachments: 
 
 **POST "/api/upload"** >> add new file and link it to appropriate item
@@ -78,6 +85,8 @@ Content-Type: application/json
 
 **GET "/api/files/{id}"** >> get certain file
 
+<hr />
+
 Users: 
 
 **GET "/api/users"** >> get all users 
@@ -92,4 +101,4 @@ Users:
     }, 
 ]
 ```
-
+<hr />
