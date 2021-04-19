@@ -15,13 +15,14 @@ The application provides an API for a separate front-end part (see another proje
 ### API Documentation. 
 
 <hr />
-Authentication:
+
+:page_facing_up:***Authentication:***
 
 **POST "/api/auth/signin"** >> for login
 
 <hr />
 
-Items:
+***Items:***
 
 **GET "/api/items"** >> get all items
 
@@ -58,7 +59,7 @@ Content-Type: application/json
 
 <hr />
 
-Attachments: 
+***Attachments:***
 
 **POST "/api/upload"** >> add new file and link it to appropriate item
 
@@ -87,7 +88,7 @@ Content-Type: application/json
 
 <hr />
 
-Users: 
+***Users:*** 
 
 **GET "/api/users"** >> get all users 
 ```
