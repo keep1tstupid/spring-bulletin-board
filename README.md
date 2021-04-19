@@ -42,7 +42,7 @@ Content-Type: application/json
 ]
 ```
 
-**GET "/api/items/{id}"** >> get item by id
+**GET "/api/items/{id}"** >> get item by id 
 
 **GET "/api/types"** >> get all item types, returns values from ItemTypes enum
 
@@ -53,7 +53,34 @@ Content-Type: application/json
 
 **POST "/api/items"** >> add new item
 
+```
+    {
+        attachmentFile: ""/{}
+        author: String
+        contactInfo: String
+        description: String
+        state: "IN_MODERATION"
+        title: String
+        type: "ADVERTISEMENT"/"COMPLAINT"/"NOTE"/"OTHER"
+    }
+```
+
 **PUT "/api/items/{id}"** >> update existing item
+
+Content-Type: application/json
+
+```
+    {
+        attachmentFile: ""/file
+        attachmentId: int
+        contactInfo: String
+        description: String
+        id: int
+        state: "IN_MODERATION"
+        title: String
+        type: "ADVERTISEMENT"/"COMPLAINT"/"NOTE"/"OTHER"
+    }
+```
 
 **DELETE "/api/items/{id}"** >> delete item
 
@@ -91,6 +118,10 @@ Content-Type: application/json
 :page_facing_up:  **Users:**
 
 **GET "/api/users"** >> get all users 
+
+Content-Type: application/json
+
+Available for users with "ROLE_ADMIN" role.
 ```
 [
     {
