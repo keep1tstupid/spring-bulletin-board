@@ -20,6 +20,8 @@ The application provides an API for a separate front-end part (https://github.co
 
 **POST "/api/auth/signin"** >> for login
 
+Content-Type: application/json
+
 ```
     password: String
     username: String
