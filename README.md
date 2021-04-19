@@ -2,7 +2,7 @@
 
 This is the final project for the Server (back-end) Development course in Haaga-Helia UAS.
 
-The application provides an API for a separate front-end part (https://github.com/keep1tstupid/react-bulletin-board-front), the endpoints are briefly described below.
+The application provides an API for [a separate front-end part](https://github.com/keep1tstupid/react-bulletin-board-front), the endpoints are briefly described below.
 
 
 #### In the project I am using:  
