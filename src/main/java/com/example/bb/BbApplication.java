@@ -10,15 +10,7 @@ import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
 public class BbApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(BbApplication.class, args);
     }
-
-//    @Bean
-//    public CommandLineRunner bbDemo(ItemRepository itemRepository,
-//                                    UserRepository userRepository
-//    ) {
-//        return (args) -> { };
-//    }
 }

@@ -3,7 +3,6 @@ package com.example.bb.service;
 import com.example.bb.domain.User;
 import com.example.bb.repository.UserRepository;
 
-import com.example.bb.security.jwt.AuthEntryPointJwt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

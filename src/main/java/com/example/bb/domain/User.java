@@ -1,8 +1,7 @@
 package com.example.bb.domain;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
 
 @Entity
 @Table(name = "users")
@@ -69,14 +68,5 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                '}';
     }
 }

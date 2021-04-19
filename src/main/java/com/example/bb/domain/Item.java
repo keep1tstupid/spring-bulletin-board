@@ -105,15 +105,4 @@ public class Item {
     public void setAttachmentId(Long attachmentId) {
         this.attachmentId = attachmentId;
     }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                ", contactInfo='" + contactInfo + '\'' +
-                '}';
-    }
 }

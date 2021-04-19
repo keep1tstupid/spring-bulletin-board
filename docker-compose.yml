@@ -18,5 +18,4 @@ volumes:
 # docker-compose down << stop db
 # docker-compose down -v << destroy database
 # docker-compose logs -f --tail 200 bb-database << see db logs
-
 # jdbc:postgresql://localhost:5555/bbbase

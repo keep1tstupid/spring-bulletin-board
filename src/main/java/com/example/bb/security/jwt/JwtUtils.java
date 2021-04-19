@@ -15,7 +15,7 @@ import java.util.Date;
 public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
-    private final String jwtSecret = "lolka123";
+    private final String jwtSecret = "bbapp123";
 
     private final long jwtExpirationMs = 1000000000L;
 
