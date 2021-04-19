@@ -12,15 +12,11 @@ The application provides an API for a separate front-end part (see another proje
 
 #### API Documentation. 
 
-Attachments: 
+Authentication:
 
-POST "/api/upload" >> add new file and link it to appropriate item
+POST "/api/auth/signin" >> for login
 
-GET "/api/files" >> get all files
-
-GET "/api/files/{id}" >> get certain file
-
-Items: 
+Items:
 
 GET "/api/items" >> get all items
 
@@ -34,9 +30,13 @@ PUT "/api/items/{id}" >> update existing item
 
 DELETE "/api/items/{id}" >> delete item
 
-Authentication: 
+Attachments: 
 
-POST "/api/auth/signin" >> for login
+POST "/api/upload" >> add new file and link it to appropriate item
+
+GET "/api/files" >> get all files
+
+GET "/api/files/{id}" >> get certain file
 
 Users: 
 
