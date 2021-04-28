@@ -39,7 +39,6 @@ public class ItemController {
         return itemRepository.save(newItem);
     }
 
-
     // update item
     @PutMapping("/items/{id}")
     Optional<Item> updateItem(@RequestBody Item newItem, @PathVariable("id") Long itemId) {
