@@ -42,9 +42,9 @@ Content-Type: application/json
         contactInfo: String
         description: String
         id: int
-        state: "APPROVED"/"DECLINED"/"IN_MODERATION"
+        state: String
         title: String
-        type: "ADVERTISEMENT"/"COMPLAINT"/"NOTE"/"OTHER"
+        type: String
     }, 
 ]
 ```
@@ -72,9 +72,9 @@ Request payload:
         author: String
         contactInfo: String
         description: String
-        state: "IN_MODERATION"
+        state: String
         title: String
-        type: "ADVERTISEMENT"/"COMPLAINT"/"NOTE"/"OTHER"
+        type: String
     }
 ```
 
@@ -89,9 +89,9 @@ Content-Type: application/json
         contactInfo: String
         description: String
         id: int
-        state: "IN_MODERATION"
+        state: String
         title: String
-        type: "ADVERTISEMENT"/"COMPLAINT"/"NOTE"/"OTHER"
+        type: String
     }
 ```
 
@@ -143,15 +143,13 @@ Available for users with "ROLE_ADMIN" role.
         email: String
         id: int
         password: String
-        role: "ROLE_ADMIN"/"ROLE_MODERATOR"/"ROLE_USER"
+        role: String
         username: String
     }, 
 ]
 ```
 
 **GET "/api/roles"** >> get all roles
-
-Content-Type: application/json
 
 `[String, String, ... ]`
 
