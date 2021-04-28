@@ -64,6 +64,8 @@ Content-Type: application/json
 
 **POST "/api/items"** >> add new item
 
+Request payload:
+
 ```
     {
         attachmentFile: ""/{}
@@ -102,6 +104,8 @@ Content-Type: application/json
 **POST "/api/upload"** >> add new file and link it to appropriate item
 
 Content-Type: application/json
+
+Request payload:
 ```
     file: (binary)
     id: int
@@ -144,4 +148,27 @@ Available for users with "ROLE_ADMIN" role.
     }, 
 ]
 ```
+
+**GET "/api/roles"** >> get all roles
+
+Content-Type: application/json
+
+`[String, String, ... ]`
+
+
+**POST "/api/users"** >> add new user
+
+Content-Type: application/json
+
+Request payload: 
+
+```
+{ 
+    username: String
+    password: String
+    email: String
+    role: String
+}
+```
+
 <hr />

@@ -29,7 +29,7 @@ public class UserControllerTest {
 
     @Test
     public void createNewUserTest() throws Exception {
-        User user = new User("test_user", Role.ROLE_ADMIN, "email@test.test", "test");
+        User user = new User("test_add_user", Role.ROLE_ADMIN, "test@test.test", "test");
         mockMvc.perform(post("/api/users")
                 .contentType("application/json").content(objectMapper.writeValueAsString(user)))
                 .andExpect(status().isOk());
