@@ -27,7 +27,7 @@ public class EmailController {
             }
         });
         Message msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress("buul.booard@gmail.com", false));
+        msg.setFrom(new InternetAddress(getenv("EMAIL_ADDRESS"), false));
 
 
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(address));
