@@ -38,7 +38,6 @@ public class EmailController {
         Message msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(getenv("EMAIL_ADDRESS"), false));
 
-
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(address));
         msg.setSubject("BB service - Account info");
         msg.setContent("BB email", "text/html");

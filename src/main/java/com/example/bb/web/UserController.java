@@ -46,7 +46,6 @@ public class UserController {
         return userRepository.save(userToSave);
     }
 
-
     // update user
     @PutMapping("/users/{id}")
     Optional<User> updateItem(@RequestBody User newUser, @PathVariable("id") Long userId) {
@@ -58,5 +57,11 @@ public class UserController {
                     user.setPassword(newUser.getPassword());
                     return userRepository.save(user);
                 });
+    }
+
+    // delete user
+    @DeleteMapping("/users/{id}")
+    void deleteUser(@PathVariable Long id) {
+        userRepository.deleteById(id);
     }
 }
