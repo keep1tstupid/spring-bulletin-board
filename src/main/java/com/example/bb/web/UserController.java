@@ -54,7 +54,7 @@ public class UserController {
                     user.setUsername(newUser.getUsername());
                     user.setRole(newUser.getRole());
                     user.setEmail(newUser.getEmail());
-                    user.setPassword(newUser.getPassword());
+//                    user.setPassword(newUser.getPassword());
                     return userRepository.save(user);
                 });
     }

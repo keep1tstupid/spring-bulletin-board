@@ -3,15 +3,13 @@ package com.example.bb.web;
 import com.example.bb.domain.User;
 import com.example.bb.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.IOException;
 import java.util.Date;
+import java.util.Map;
 import java.util.Properties;
 
 import static java.lang.System.getenv;
@@ -22,7 +20,32 @@ public class EmailController {
     @Autowired
     UserRepository userRepository;
 
-    private void sendmail(String address, String username, String password)
+    private String makeMessageContent(String eventType, User user) {
+        String msg = "";
+
+        switch(eventType) {
+            case "newUser":
+                System.out.println("Type is " + eventType);
+                msg = String.format("hey, %s, account for you is created! go and check " +
+                        "with following credentials: "  +
+                        "<br/>username: %s <br/>password: %s", user.getUsername(),
+                        user.getUsername(), user.getPassword());
+                break;
+            case "updUser":
+                msg = String.format("hey, %s, your account was updated, " +
+                "go and check it", user.getUsername());
+                break;
+            case "delUser":
+                msg = "your account was deleted, he-he";
+                break;
+            default:
+                msg = "sorry, something went wrong";
+        }
+
+        return msg;
+    };
+
+    private void sendmail(String address, String msgText)
             throws AddressException, MessagingException, IOException {
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -44,9 +67,6 @@ public class EmailController {
         msg.setSentDate(new Date());
 
         MimeBodyPart messageBodyPart = new MimeBodyPart();
-        String msgText = String.format("your account was updated, " +
-                "check with the following credentials: " +
-                "<br/>username: %s <br/>password: %s", username, password);
         messageBodyPart.setContent(msgText, "text/html");
 
         Multipart multipart = new MimeMultipart();
@@ -58,9 +78,13 @@ public class EmailController {
         Transport.send(msg);
     }
 
-    @PostMapping("/send-email")
-    public String sendEmail(@RequestBody User user) throws MessagingException, IOException {
-        sendmail(user.getEmail(), user.getUsername(), user.getPassword());
+    @PostMapping("/send-email/{eventType}")
+    public String sendEmail(@PathVariable("eventType") String eventType, @RequestBody User user)
+            throws MessagingException, IOException {
+//        System.out.println("event type " + eventType);
+//        System.out.println("user " + user.getUsername());
+        String msgText = makeMessageContent(eventType, user);
+        sendmail(user.getEmail(), msgText);
         return "Email sent successfully";
     }
 }
