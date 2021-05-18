@@ -3,7 +3,6 @@ package com.example.bb.RepositoryTests;
 import com.example.bb.domain.Item;
 import com.example.bb.domain.ItemState;
 import com.example.bb.domain.ItemType;
-import com.example.bb.domain.User;
 import com.example.bb.repository.ItemRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

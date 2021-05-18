@@ -9,7 +9,6 @@ import javax.mail.*;
 import javax.mail.internet.*;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Map;
 import java.util.Properties;
 
 import static java.lang.System.getenv;
@@ -43,7 +42,7 @@ public class EmailController {
         }
 
         return msg;
-    };
+    }
 
     private void sendmail(String address, String msgText)
             throws AddressException, MessagingException, IOException {
