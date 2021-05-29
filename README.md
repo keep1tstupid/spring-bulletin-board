@@ -1,6 +1,9 @@
 # spring-bulletin-board
 
-This is the final project for the Server (back-end) Development course in Haaga-Helia UAS.
+The idea of Bulletin Board application is to provide a service for people who are living in the same buiding, where they can post notes, ads, complaints, etc. 
+
+There are 3 roles in the app: user, moderator and administrator. 
+Currently, I am working on email notifications.
 
 The application provides an API for [a separate front-end part](https://github.com/keep1tstupid/react-bulletin-board-front), the endpoints are briefly described below.
 
